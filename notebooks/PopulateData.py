@@ -8,13 +8,11 @@ from pyspark.sql.functions import *
 
 # COMMAND ----------
 
-# MAGIC %sql
-# MAGIC create database if not exists getArgument("DatabaseName")
+spark.sql("create database if not exists {}".format(dbutils.widgets.get("DatabaseName")))
 
 # COMMAND ----------
 
-# MAGIC %sql
-# MAGIC use getArgument("DatabaseName")
+spark.sql("USE {}".format(dbutils.widgets.get("DatabaseName")))
 
 # COMMAND ----------
 
