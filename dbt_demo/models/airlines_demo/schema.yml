@@ -1,0 +1,43 @@
+
+version: 2
+
+models:
+    - name: daily_airlines_flights
+      description: "Daily Airline Statistics"
+      columns:
+          - name: FlightNum
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+
+    - name: daily_airlines_flights_view
+      description: "Daily Airline Statistics"
+      columns:
+          - name: FlightNum
+            # A data test is a select statement that returns 0 records
+            tests:
+                - unique
+                - not_null
+                # this allows for REFERNTIAL INTEGRITY 
+                - relationships:
+                    to: ref('daily_airlines_flights') 
+                    field: FlightNum
+                
+
+    - name: monthly_airlines_flights
+      description: "Summarized airline flight count by month"
+      columns:
+          - name: pk
+            description: "The primary key of the table"
+            tests:
+                - not_null
+                - unique
+          - name: year
+            description: "Year of the flights"
+            tests:
+                - not_null
+          - name: month
+            description: "Month of the flights"
+            tests:
+                - not_null
